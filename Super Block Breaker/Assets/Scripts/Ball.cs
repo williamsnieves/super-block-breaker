@@ -48,7 +48,10 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 velocityTweak = new Vector2(UnityEngine.Random.Range(0, randomFactor), Random.Range(0, randomFactor));
-        
-        myRigidBody2D.velocity += velocityTweak;
+        if (hasStarted)
+        {
+            GetComponent<AudioSource>().Play();
+            myRigidBody2D.velocity += velocityTweak;
+        }
     }
 }
