@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [SerializeField] float yPush = 15f;
     [SerializeField] float randomFactor = 0.2f;
     [SerializeField] AudioClip[] ballSounds;
+    [SerializeField] GameObject bubbleVfx;
     Vector2 paddleToBallVector;
     Rigidbody2D myRigidBody2D;
     bool hasStarted = false;
@@ -45,8 +46,15 @@ public class Ball : MonoBehaviour
         {
             hasStarted = true;
             GetComponent<Rigidbody2D>().velocity = new Vector2(xPush, yPush);
+            TriggerBubbleFX();
         }
 
+    }
+
+    private void TriggerBubbleFX()
+    {
+        GameObject bubbles = Instantiate(bubbleVfx, transform.position, transform.rotation);
+        Destroy(bubbles, 1f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
